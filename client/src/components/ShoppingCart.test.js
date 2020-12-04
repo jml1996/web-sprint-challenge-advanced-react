@@ -4,7 +4,8 @@ import userEvent from '@testing-library/user-event';
 import { act } from "react-dom/test-utils";
 import ShoppingCart from "./ShoppingCart";
 
-// Stretch:
+// Testing for shopping cart, for the testing stretch goal:
+
 const plants = [{
     name: "String of Dolphins",
     id: 125341,

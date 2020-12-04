@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+// ****** Note from Joshua Lovins: modified this (PlantList.js) extensively
+// for my execution of the filter stretch goal.
+// My PlantList component has a dropdown that filters
+// plants in PlantList based on difficulty 
+// ('easy' or 'medium' or 'none'; defaults to 'none'). ******
+
 export default class PlantList extends Component {
   // add state with a property called "plants" - initialize as an empty array
   state = {
@@ -48,6 +54,10 @@ export default class PlantList extends Component {
   //   - fetch data from the server endpoint - http://localhost:3333/plants
   //   - set the returned plants array to this.state.plants
 
+  // ****** Note from Joshua Lovins: I changed stuff in render for my filter
+  // functionality (for the stretch goal). Namely, I added a form above <main>
+  // that filters plants based on difficulty ('easy' or 'medium' or 'none'; defaults
+  // to 'none'). ******
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
   render() {
     return (
