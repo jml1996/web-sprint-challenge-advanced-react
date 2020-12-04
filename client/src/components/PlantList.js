@@ -4,18 +4,44 @@ import axios from "axios";
 export default class PlantList extends Component {
   // add state with a property called "plants" - initialize as an empty array
   state = {
-    plants: []
+    masterPlants: [],
+    plants: [],
+    filter: ""
   }
 
   componentDidMount(){
     axios.get("http://localhost:3333/plants")
       .then((resp) => {
-        // console.log(resp.data.plantsData);
+        console.log(resp.data.plantsData);
         this.setState({
+          masterPlants: resp.data.plantsData,
           plants: resp.data.plantsData
         });
       })
       .catch(err => console.log(err));
+  }
+
+  handleChange(event) {
+    const filterVar =  event.target.value !== undefined ? event.target.value : "";
+    console.log(filterVar);
+    this.setState({
+      filter: filterVar
+    });
+  }
+
+  handleSubmit(event) {
+    if (this.state.filter === "none" || this.state.filter === ""){
+      this.setState({
+        plants: this.state.masterPlants
+      })
+    } else {
+      this.setState({
+        plants: this.state.masterPlants.filter(plant => {
+          return plant.difficulty === this.state.filter
+        })
+      });
+    }
+    event.preventDefault();
   }
 
   // when the component mounts:
@@ -25,6 +51,20 @@ export default class PlantList extends Component {
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
   render() {
     return (
+      <>
+
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        <label>
+          Difficulty filter:
+          <select value={this.state.value} onChange={this.handleChange.bind(this)}>
+            <option value="none">none</option>
+            <option value="easy">easy</option>
+            <option value="medium">medium</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+
       <main className="plant-list">
         {this.state?.plants?.map((plant) => (
           <div className="plant-card" key={plant.id}>
@@ -48,6 +88,7 @@ export default class PlantList extends Component {
           </div>
         ))}
       </main>
+      </>
     );
   }
 }
