@@ -3,6 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import CheckoutForm from "./CheckoutForm";
 import { act } from "react-dom/test-utils";
+import ShoppingCart from "./ShoppingCart";
+
 
 // Write up the two tests here and make sure they are testing what the title shows
 
@@ -62,6 +64,7 @@ test("form shows success message on submit with form details", async() => {
     expect(messageState).toBeInTheDocument();
     expect(messageZip).toBeInTheDocument();
 });
+
 
 // await act(async () => {
 //     userEvent.click(lastNameInput);
